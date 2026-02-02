@@ -27,4 +27,9 @@ public class LivroController {
     public Livro criar(@RequestBody Livro livro){
         return livroRepository.save(livro);
     }
+    // Deletar um livro
+    @DeleteMapping("/{id}")
+    public void deletar(@PathVariable Long id){
+        livroRepository.deleteById(id);
+    }
 }
