@@ -35,4 +35,27 @@ public class LivroService {
         livroRepository.deleteById(id);
     }
 
+
+    public Livro update(Long id, Livro livroAtualizado){
+        // 1 Tentar achar livro se nao achar lançar error
+
+        Livro livroExistente = livroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Book not founded whit id : " + id ));
+        // 2 Atualiza dados
+        livroExistente.setTitle(livroAtualizado.getTitle());
+        livroExistente.setAutor(livroAtualizado.getAutor());
+
+        if(livroAtualizado.getIsbn() != null){
+            livroExistente.setIsbn(livroAtualizado.getIsbn().toUpperCase());
+        }
+
+        //3 Atualiza categoria
+
+        livroExistente.setCategoria(livroAtualizado.getCategoria());
+
+        return  livroRepository.save(livroExistente);
+    }
+
+
+
 }

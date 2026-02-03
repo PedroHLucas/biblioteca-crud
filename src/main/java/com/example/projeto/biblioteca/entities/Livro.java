@@ -17,6 +17,9 @@ public class Livro {
     private String title;
     private String autor;
     private String isbn;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category categoria;
 
     public Long getId() {
         return id;
@@ -48,5 +51,13 @@ public class Livro {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public Category getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Category categoria) {
+        this.categoria = categoria;
     }
 }
