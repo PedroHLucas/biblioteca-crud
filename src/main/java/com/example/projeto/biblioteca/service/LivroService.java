@@ -2,6 +2,7 @@ package com.example.projeto.biblioteca.service;
 
 import com.example.projeto.biblioteca.entities.Livro;
 import com.example.projeto.biblioteca.repository.LivroRepository;
+import com.example.projeto.biblioteca.service.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +41,7 @@ public class LivroService {
         // 1 Tentar achar livro se nao achar lançar error
 
         Livro livroExistente = livroRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not founded whit id : " + id ));
+                .orElseThrow(() -> new ResourceNotFoundException(id));
         // 2 Atualiza dados
         livroExistente.setTitle(livroAtualizado.getTitle());
         livroExistente.setAutor(livroAtualizado.getAutor());
