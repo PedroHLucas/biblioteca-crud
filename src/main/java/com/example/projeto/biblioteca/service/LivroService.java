@@ -57,6 +57,11 @@ public class LivroService {
         return  livroRepository.save(livroExistente);
     }
 
+    public Livro findById(Long id) {
+        return livroRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
+    }
+
 
 
 }
